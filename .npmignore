@@ -1,0 +1,5 @@
+src/
+build/
+node_modules/
+.babelrc
+.gitignore

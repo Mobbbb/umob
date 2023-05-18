@@ -1,0 +1,28 @@
+{
+	"name": "umob",
+	"version": "0.0.3",
+	"description": "Umob modular utilities",
+	"main": "umob.js",
+	"scripts": {
+		"build": "node build/index.js"
+	},
+	"keywords": [
+		"modules",
+		"stdlib",
+		"util"
+	],
+	"author": "Mob",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/core": "^7.21.8",
+		"@babel/preset-env": "^7.21.5",
+		"babel-loader": "^9.1.2",
+		"chalk": "^4.1.2",
+		"ora": "^5.4.1",
+		"webpack-cli": "^5.1.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Mobbbb/umob.git"
+	}
+}
