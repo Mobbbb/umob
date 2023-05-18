@@ -1,0 +1,11 @@
+{
+    "presets":[
+        [
+            "@babel/preset-env",  {
+                // 一般在webpack 项目中，我们会将此参数设置为false,既将module交由webpack处理，而不是babel。
+                "modules": false 
+            }
+        ]
+    ],
+    "plugins": []
+}
