@@ -5,7 +5,7 @@
  * @param {Boolean} includeHeadAndTail 是否包含起止日期
  * @returns {Array}
  */
-function getDateListBetwGap(stime, etime, includeHeadAndTail = true) {
+function dateGap(stime, etime, includeHeadAndTail = true) {
     if (typeof stime !== 'string' || typeof etime !== 'string') {
         throw new Error('Type of stime or etime must be "string"')
     }
@@ -62,4 +62,4 @@ function getDateListBetwGap(stime, etime, includeHeadAndTail = true) {
     return diffdate
 }
 
-module.exports = getDateListBetwGap
+module.exports = dateGap
