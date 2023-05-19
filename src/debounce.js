@@ -1,9 +1,9 @@
 /**
  * @description 函数防抖, 示例：window.onscroll = debounce(onScroll, 200)
- * @param {*} fn 需要防抖的方法, 如: 输入框联想、keyup
- * @param {*} wait 防抖间隔
- * @param {*} immediate 第一次调用是否立即执行一次fn
- * @returns 
+ * @param {Function} fn 需要防抖的方法, 如: 输入框联想、keyup
+ * @param {Number} wait 防抖间隔
+ * @param {Boolean} immediate 第一次调用是否立即执行一次fn
+ * @returns {Function}
  */
 function debounce(fn, wait, immediate = true) {
     if (wait == null) return fn
