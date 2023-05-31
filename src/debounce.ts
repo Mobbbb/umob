@@ -5,10 +5,10 @@
  * @param {Boolean} immediate 第一次调用是否立即执行一次fn
  * @returns {Function}
  */
-function debounce(fn, wait, immediate = true) {
+export function debounce(fn: (...items: any[]) => any, wait: number, immediate: boolean = true): (...items: any[]) => any {
     if (wait == null) return fn
     const timestampProvider = typeof performance === 'object' ? performance : Date
-    let timeout, args, context, timestamp, result
+    let timeout: NodeJS.Timeout, args: IArguments, context: any, timestamp: number, result: any
 
     var later = function() {
         var last = timestampProvider.now() - timestamp
@@ -39,5 +39,3 @@ function debounce(fn, wait, immediate = true) {
         return result
     }
 }
-
-module.exports = debounce
