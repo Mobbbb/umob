@@ -5,16 +5,7 @@
  * @param {Boolean} includeHeadAndTail 是否包含起止日期
  * @returns {Array}
  */
-function dateGap(stime, etime, includeHeadAndTail = true) {
-    if (typeof stime !== 'string' || typeof etime !== 'string') {
-        throw new Error('Type of stime or etime must be "string"')
-    }
-    if (stime.length !== etime.length) {
-        throw new Error('Length of stime must be the same as etime')
-    }
-    if (stime.length !== 10 && stime.length !== 7 && stime.length !== 4) {
-        throw new Error('stime and etime must be format like "yyyy-MM-dd"')
-    }
+export function dateGap(stime: string, etime: string, includeHeadAndTail: boolean = true): string[] {
     if (isNaN((new Date(stime)).getDate()) || isNaN((new Date(etime)).getDate())) {
         throw new Error('stime and etime must be a valid date')
     }
@@ -25,7 +16,7 @@ function dateGap(stime, etime, includeHeadAndTail = true) {
         diffdate.push(stime)
 
         if (length === 7) {
-            let nextMonth = parseInt(stime.slice(5, 7)) + 1
+            let nextMonth: number | string = parseInt(stime.slice(5, 7)) + 1
             let nextYear = parseInt(stime.slice(0, 4))
             nextYear = nextMonth > 12 ? nextYear + 1 : nextYear
             nextMonth = nextMonth > 12 ? nextMonth - 12 : nextMonth
@@ -61,5 +52,3 @@ function dateGap(stime, etime, includeHeadAndTail = true) {
 
     return diffdate
 }
-
-module.exports = dateGap
