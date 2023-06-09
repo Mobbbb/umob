@@ -8,7 +8,7 @@
 export function debounce(fn: (...items: any[]) => any, wait: number, immediate: boolean = true): (...items: any[]) => any {
     if (wait == null) return fn
     const timestampProvider = typeof performance === 'object' ? performance : Date
-    let timeout: NodeJS.Timeout, args: IArguments, context: any, timestamp: number, result: any
+    let timeout: number | null, args: any, context: any, timestamp: number, result: any
 
     var later = function() {
         var last = timestampProvider.now() - timestamp
@@ -24,7 +24,7 @@ export function debounce(fn: (...items: any[]) => any, wait: number, immediate: 
         }
     }
 
-    return function() {
+    return function(this: any) {
         context = this
         args = arguments
         timestamp = timestampProvider.now()
