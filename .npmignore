@@ -1,5 +1,6 @@
 src/
 build/
 node_modules/
+coverage/
 .babelrc
 .gitignore

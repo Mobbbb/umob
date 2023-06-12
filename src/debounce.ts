@@ -8,7 +8,7 @@
 export function debounce(fn: (...items: any[]) => any, wait: number, immediate: boolean = true): (...items: any[]) => any {
     if (wait == null) return fn
     const timestampProvider = typeof performance === 'object' ? performance : Date
-    let timeout: number | null, args: any, context: any, timestamp: number, result: any
+    let timeout: NodeJS.Timeout | null, args: any, context: any, timestamp: number, result: any
 
     var later = function() {
         var last = timestampProvider.now() - timestamp
