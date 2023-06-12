@@ -13,7 +13,10 @@
 	"scripts": {
 		"build": "rollup -c",
 		"test": "jest",
-		"test:single": "jest ./src/__tests__/dateGap.ts --coverage --collectCoverageFrom=**/dateGap.ts"
+		"test:single": "jest ./src/__tests__/%npm_package_config_testSingleFileName%.ts --coverage --collectCoverageFrom=**/%npm_package_config_testSingleFileName%.ts"
+	},
+    "config": {
+		"testSingleFileName" : "dateGap"
 	},
 	"keywords": [
 		"modules",
