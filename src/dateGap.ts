@@ -7,7 +7,7 @@
  */
 export function dateGap(stime: string, etime: string, includeHeadAndTail: boolean = true): string[] {
     if (isNaN((new Date(stime)).getDate()) || isNaN((new Date(etime)).getDate())) {
-        throw new Error('stime and etime must be a valid date')
+        return ['1970-01-01']
     }
     
     const length = stime.length
