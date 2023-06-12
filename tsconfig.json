@@ -13,6 +13,6 @@
         "strict": true /* 启用严格模式 */
     },
     "include": ["src/index.ts"],
-    "exclude": ["node_modules", "lib"]
+    "exclude": ["node_modules", "lib"],
 }
   
