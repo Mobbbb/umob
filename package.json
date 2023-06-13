@@ -11,12 +11,14 @@
 		"lib"
 	],
 	"scripts": {
+		"lint": "eslint --ext .ts src/",
 		"build": "rollup -c",
 		"test": "jest",
-		"test:single": "jest ./src/__tests__/%npm_package_config_testSingleFileName%.ts --coverage --collectCoverageFrom=**/%npm_package_config_testSingleFileName%.ts"
+		"test:single": "jest ./src/__tests__/%npm_package_config_testSingleFileName%.ts --coverage --collectCoverageFrom=**/%npm_package_config_testSingleFileName%.ts",
+		"installGitHook": "husky install"
 	},
-    "config": {
-		"testSingleFileName" : "dateGap"
+	"config": {
+		"testSingleFileName": "dateGap"
 	},
 	"keywords": [
 		"modules",
@@ -33,13 +35,18 @@
 		"@rollup/plugin-terser": "^0.4.3",
 		"@rollup/plugin-typescript": "^11.1.1",
 		"@types/jest": "^29.5.2",
+		"@typescript-eslint/eslint-plugin": "^5.59.9",
+		"@typescript-eslint/parser": "^5.59.9",
 		"babel-jest": "^29.5.0",
+		"eslint": "^8.42.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"husky": "^8.0.3",
 		"jest": "^29.5.0",
 		"jest-environment-jsdom": "^29.5.0",
 		"rollup": "^3.23.0",
 		"ts-jest": "^29.1.0",
 		"tslib": "^2.5.2",
-		"typescript": "^5.0.4"
+		"typescript": "~5.0.4"
 	},
 	"repository": {
 		"type": "git",
