@@ -5,13 +5,17 @@
  * @param {Boolean} immediate 第一次调用是否立即执行一次fn
  * @returns {Function}
  */
-export function debounce(fn: (...items: any[]) => any, wait: number, immediate: boolean = true): (...items: any[]) => any {
+export function debounce(fn: () => any, wait: number, immediate: boolean = true): () => any {
     if (wait == null) return fn
     const timestampProvider = typeof performance === 'object' ? performance : Date
-    let timeout: NodeJS.Timeout | null, args: any, context: any, timestamp: number, result: any
+    let timeout: NodeJS.Timeout | null
+    let args: any
+    let context: any
+    let timestamp: number
+    let result: any
 
-    var later = function() {
-        var last = timestampProvider.now() - timestamp
+    const later = function() {
+        const last = timestampProvider.now() - timestamp
         // 每次调用都会更新timestamp的值，如果时间间隔没有超过wait，那么启用新的定时器
         if (last < wait && last >= 0) {
             timeout = setTimeout(later, wait - last)
@@ -19,21 +23,25 @@ export function debounce(fn: (...items: any[]) => any, wait: number, immediate: 
             timeout = null
             if (!immediate) {
                 result = fn.apply(context, args)
-                if (!timeout) context = args = null
+                if (!timeout) {
+                    context = null
+                    args = null
+                }
             }
         }
     }
 
-    return function(this: any) {
+    return function(this: any, ...restArgs) {
         context = this
-        args = arguments
+        args = restArgs
         timestamp = timestampProvider.now()
         // 立即执行
-        var callNow = immediate && !timeout
+        const callNow = immediate && !timeout
         if (!timeout) timeout = setTimeout(later, wait)
         if (callNow) {
             result = fn.apply(context, args)
-            context = args = null
+            context = null
+            args = null
         }
 
         return result
