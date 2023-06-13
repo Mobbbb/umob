@@ -14,6 +14,7 @@
 		"lint": "eslint --ext .ts src/",
 		"build": "rollup -c",
 		"test": "jest",
+		"coveralls": "jest --coverage",
 		"test:single": "jest ./src/__tests__/%npm_package_config_testSingleFileName%.ts --coverage --collectCoverageFrom=**/%npm_package_config_testSingleFileName%.ts",
 		"installGitHook": "husky install"
 	},
