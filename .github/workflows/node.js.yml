@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: Build CI
 
 on:
   push:
@@ -11,53 +11,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.20.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    # 生成测试覆盖率
-    - run: npm run coveralls
-    # - run: npm run build --if-present
-    # 上报
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  publish-npm:
-
-    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
 
     strategy:
       matrix:
         node-version: [16.20.0]
 
     steps:
-      # 检查并切换到main分支
-      - name: 检查main分支
-        # 使用actions/checkout插件
+      - name: 检出分支
         uses: actions/checkout@v3
 
-      # 初始化缓存
-      - name:  缓存
+      - name: 初始化缓存
         uses: actions/cache@v3
         id: cache-dependencies
         with:
           path: node_modules
           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
 
-      # 安装node
-      - name: 设置Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         # 使用actions/setup-node插件
         uses: actions/setup-node@v3
         with:
@@ -65,10 +38,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
+      # 生成测试覆盖率
+      - run: npm run coveralls
       - run: npm run build
+      
+      - name: 上报测试覆盖率
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 读取当前版本号
-      - name: 读取当前版本号
+      - name: 读取版本号
         id: version
         uses: notiz-dev/github-action-json-property@release
         with:
@@ -78,22 +57,19 @@ jobs:
 
       - run: echo ${{steps.version.outputs.prop}}
 
-      # 创建Release
-      - name: Release
+      - name: 创建Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./lib/index.cjs.js
-            ./lib/index.esm.js
             ./lib/index.umd.js
+            ./lib/index.esm.js
+            ./lib/index.cjs.js
           name: v${{steps.version.outputs.prop}}
           tag_name: v${{steps.version.outputs.prop}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 发布NPM包
       - name: 发布NPM包
-        # 执行发布代码
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           npm publish
