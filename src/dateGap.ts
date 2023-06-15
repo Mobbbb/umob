@@ -5,7 +5,7 @@
  * @param {Boolean} includeHeadAndTail 是否包含起止日期
  * @returns {Array}
  */
-export function dateGap(startTime: string, etime: string, includeHeadAndTail: boolean = true): string[] {
+function dateGap(startTime: string, etime: string, includeHeadAndTail: boolean = true): string[] {
     let stime = startTime
     if (Number.isNaN((new Date(stime)).getDate()) || Number.isNaN((new Date(etime)).getDate())) {
         return ['1970-01-01']
@@ -53,3 +53,5 @@ export function dateGap(startTime: string, etime: string, includeHeadAndTail: bo
 
     return diffdate
 }
+
+export default dateGap

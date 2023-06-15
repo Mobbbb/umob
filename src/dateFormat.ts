@@ -4,7 +4,7 @@
  * @param {String} argFmt 日期格式
  * @returns {String} date
  */
-export function dateFormat(argDate: Date | string, argFmt: string): string {
+function dateFormat(argDate: Date | string, argFmt: string): string {
     let date = argDate
     let fmt = argFmt
     if (!(date instanceof Date)) {
@@ -52,3 +52,5 @@ export function dateFormat(argDate: Date | string, argFmt: string): string {
     })
     return fmt
 }
+
+export default dateFormat
