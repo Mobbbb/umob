@@ -27,9 +27,76 @@ jobs:
     - run: npm ci
     # 生成测试覆盖率
     - run: npm run coveralls
-    - run: npm run build --if-present
+    # - run: npm run build --if-present
     # 上报
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-npm:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.20.0]
+
+    steps:
+      # 检查并切换到main分支
+      - name: 检查main分支
+        # 使用actions/checkout插件
+        uses: actions/checkout@v3
+
+      # 初始化缓存
+      - name:  缓存
+        uses: actions/cache@v3
+        id: cache-dependencies
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+
+      # 安装node
+      - name: 设置Node.js
+        # 使用actions/setup-node插件
+        uses: actions/setup-node@v3
+        with:
+          # node版本
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+
+      # 读取当前版本号
+      - name: 读取当前版本号
+        id: version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          # 读取版本号
+          path: './package.json'
+          prop_path: 'version'
+
+      - run: echo ${{steps.version.outputs.prop}}
+
+      # 创建Release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./lib/index.cjs.js
+            ./lib/index.esm.js
+            ./lib/index.umd.js
+          name: v${{steps.version.outputs.prop}}
+          tag_name: v${{steps.version.outputs.prop}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 发布NPM包
+      - name: 发布NPM包
+        # 执行发布代码
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm publish
+        env:
+          # 配置 npm access token 环境变量
+          NPM_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
