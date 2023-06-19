@@ -43,6 +43,7 @@ jobs:
       - run: npm run build
       
       - name: 上报测试覆盖率
+        id: coverRate
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -55,7 +56,8 @@ jobs:
           path: './package.json'
           prop_path: 'version'
 
-      - run: echo ${{steps.version.outputs.prop}}
+      - name: 打印版本号
+        run: echo ${{steps.version.outputs.prop}}
 
       - name: 创建Release
         uses: softprops/action-gh-release@v1
