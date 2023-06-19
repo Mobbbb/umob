@@ -15,6 +15,41 @@
   <img src="https://img.shields.io/npm/l/umob">
 </p>
 
-# others
+## Using npm
+```shell
+npm install umob
+```
+Then, assuming you're using a module-compatible system (like webpack, Rollup etc):
+``` javascript
+import { debounce } from 'umob'
+```
+
+On-demand Import:
+``` javascript
+import debounce from 'umob/debounce'
+```
+
+CommonJS:
+``` javascript
+const { debounce } = require('umob')
+```
+
+## Directly in a browser
+
+``` html
+<script src="index.umd.js"></script>
+<script>
+    Umob.debounce()
+</script>
+```
+
+A global, Umob, will be created, containing all exports of the module version.
+
+## documentation
+| Method     | Description     | Parameters     | Returns     |
+| -------- | -------- | -------- | -------- |
+| dateFormat | format date to 'yyyy-MM-dd', 'yyyy-MM-dd hh:mm:ss' etc | date: string \| Date </br> format: string  | date: string |
+
+## others
 
 node -v = v16.20.0
