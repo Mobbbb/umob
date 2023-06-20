@@ -4,11 +4,15 @@
  * @param {String} argFmt 日期格式
  * @returns {String} date
  */
-function dateFormat(argDate: Date | string, argFmt: string): string {
+function dateFormat(argDate: Date | string | number, argFmt: string = 'yyyy-MM-dd'): string {
     let date = argDate
     let fmt = argFmt
     if (!(date instanceof Date)) {
         date = new Date(date)
+    }
+
+    if (Number.isNaN(date.getDate())) {
+        return '1970-01-01'
     }
 
     const a = ['日', '一', '二', '三', '四', '五', '六']
@@ -45,9 +49,10 @@ function dateFormat(argDate: Date | string, argFmt: string): string {
 
     Object.keys(o).forEach(k => {
         if (new RegExp(`(${k})`).test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
-                ? o[k]
-                : ((`00${o[k]}`).substr((String(o[k])).length)))
+            fmt = fmt.replace(
+                RegExp.$1,
+                RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(String(o[k]).length),
+            )
         }
     })
     return fmt
