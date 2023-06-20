@@ -5,8 +5,8 @@
  * @param {Boolean} immediate 第一次调用是否立即执行一次fn
  * @returns {Function}
  */
-function debounce(fn: () => any, wait: number, immediate: boolean = true): () => any {
-    if (wait == null) return fn
+function debounce(fn: () => any, argWwait: number, immediate: boolean = true): () => any {
+    const wait = Number(argWwait) || 0
     const timestampProvider = typeof performance === 'object' ? performance : Date
     let timeout: NodeJS.Timeout | null
     let args: any
