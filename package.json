@@ -1,6 +1,6 @@
 {
 	"name": "umob",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Umob modular utilities",
 	"main": "lib/index.cjs.js",
 	"module": "lib/index.esm.js",
@@ -15,11 +15,12 @@
 		"build": "rollup -c",
 		"test": "jest",
 		"coveralls": "jest --coverage",
-		"test:single": "jest ./src/__tests__/%npm_package_config_testSingleFileName%.ts --coverage --collectCoverageFrom=**/%npm_package_config_testSingleFileName%.ts",
+		"test:single": "node env-dependencies.js",
 		"installGitHook": "husky install"
 	},
-	"config": {
-		"testSingleFileName": "dateGap"
+	"envDependencies": {
+		"localJSON": "./.env.json",
+		"params": ["jest ./src/__tests__/${TEST_FILE_NAME}.test.ts --coverage --collectCoverageFrom=./src/${TEST_FILE_NAME}.ts"]
 	},
 	"keywords": [
 		"modules",

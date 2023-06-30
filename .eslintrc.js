@@ -41,24 +41,32 @@ module.exports = {
         semi:[2, 'never'],
 		// 花括号约定
         curly: 'off',
+        // 禁止外部作用域中声明的隐藏变量
+        'no-shadow': 'off',
 		// 对原生对象做扩展
 		'no-extend-native': 'off',
+        // 禁止 ++
+        'no-plusplus': 'off',
+        // 箭头函数省略return
+        'arrow-body-style': 'off',
+        // 禁止使用 ts-ignore
+        '@typescript-eslint/ban-ts-comment': 'off',
+        'import/prefer-default-export': 'off',
+        // 关闭类型推断
+        '@typescript-eslint/no-inferrable-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
         'space-before-function-paren': ['error', {
             'anonymous': 'never',
             'named': 'never',
             'asyncArrow': 'always',
         }],
         'import/extensions': ['error', 'never'],
-        'import/prefer-default-export': 'off',
         // 箭头函数参数括号
         'arrow-parens': ['error', 'as-needed'],
         'func-names': ['error', 'never'],
-        // 关闭类型推断
-        '@typescript-eslint/no-inferrable-types': 'off',
         // this别名
         '@typescript-eslint/no-this-alias': ['error', {
             allowedNames: ['context', 'self'],
         }],
-        '@typescript-eslint/no-explicit-any': 'off',
     },
 }

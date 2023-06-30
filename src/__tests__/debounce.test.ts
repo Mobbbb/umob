@@ -10,9 +10,9 @@ describe('debounce: ', () => {
         })
     }
 
-    it(`Do not execute immediately'`, async () => {
+    it('Do not execute immediately', async () => {
         let count = 0
-        const addClick = debounce(() => count ++, 200, false)
+        const addClick = debounce(() => count++, 200, false)
 
         addClick()
         addClick()
@@ -22,9 +22,9 @@ describe('debounce: ', () => {
         expect(count).toEqual(1)
     })
 
-    it(`Executing funtion out of waiting time'`, async () => {
+    it('Executing funtion out of waiting time', async () => {
         let count = 0
-        const addClick = debounce(() => count ++, 200)
+        const addClick = debounce(() => count++, 200)
 
         addClick()
         addClick()
@@ -34,22 +34,21 @@ describe('debounce: ', () => {
         expect(count).toEqual(2)
     })
 
-    it(`Restting waiting time'`, async () => {
+    it('Restting waiting time', async () => {
         let count = 0
-        const addClick = debounce(() => count ++, 200)
+        const addClick = debounce(() => count++, 200)
 
         addClick()
         await testPromise(addClick, 100)
         await testPromise(addClick, 100)
         await testPromise(addClick, 100)
 
-
         expect(count).toEqual(1)
     })
 
-    it(`Error waiting time'`, async () => {
+    it('Error waiting time', async () => {
         let count = 0
-        const addClick = debounce(() => count ++, 0 / 0)
+        const addClick = debounce(() => count++, 0 / 0)
 
         addClick()
         await testPromise(addClick, 100)
@@ -57,18 +56,17 @@ describe('debounce: ', () => {
         expect(count).toEqual(2)
     })
 
-    it(`Using Date instead of performance'`, async () => {
+    it('Using Date instead of performance', async () => {
         // @ts-ignore
         delete window.performance
 
         let count = 0
-        const addClick = debounce(() => count ++, 200)
+        const addClick = debounce(() => count++, 200)
 
         addClick()
         await testPromise(addClick, 100)
         await testPromise(addClick, 100)
         await testPromise(addClick, 100)
-
 
         expect(count).toEqual(1)
     })

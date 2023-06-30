@@ -1,12 +1,12 @@
 /**
- * @description 函数防抖, 示例：window.onscroll = debounce(onScroll, 200)
+ * @description 函数防抖(进电梯), 示例：window.onscroll = debounce(onScroll, 200)
  * @param {Function} fn 需要防抖的方法, 如: 输入框联想、keyup
- * @param {Number} wait 防抖间隔
+ * @param {Number} argWait 防抖间隔
  * @param {Boolean} immediate 第一次调用是否立即执行一次fn
  * @returns {Function}
  */
-function debounce(fn: () => any, argWwait: number, immediate: boolean = true): () => any {
-    const wait = Number(argWwait) || 0
+function debounce(fn: () => any, argWait: number, immediate: boolean = true): () => any {
+    const wait = Number(argWait) || 0
     const timestampProvider = typeof performance === 'object' ? performance : Date
     let timeout: NodeJS.Timeout | null
     let args: any
