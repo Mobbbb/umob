@@ -14,7 +14,6 @@
 		"lint": "eslint --ext .ts src/",
 		"build": "rollup -c",
 		"test": "jest",
-		"coveralls": "jest --coverage",
 		"test:single": "node env-dependencies.js",
 		"installGitHook": "husky install"
 	},

@@ -20,12 +20,13 @@ function getUrlParams(variable?: string): O | string {
     const params: O = {}
 
     const regex = /([^&=]+)=([^&]*)/g
-    const match = regex.exec(queryString)
+    let match = regex.exec(queryString)
 
     while (match !== null) {
         const key = decodeURIComponent(match[1])
         const value = decodeURIComponent(match[2])
         params[key] = value
+        match = regex.exec(queryString)
     }
 
     if (variable) {
