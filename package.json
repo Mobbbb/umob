@@ -18,7 +18,6 @@
 		"installGitHook": "husky install"
 	},
 	"envDependencies": {
-		"localJSON": "./.env.json",
 		"params": ["jest ./src/__tests__/${TEST_FILE_NAME}.test.ts --coverage --collectCoverageFrom=./src/${TEST_FILE_NAME}.ts"]
 	},
 	"keywords": [

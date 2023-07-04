@@ -1,5 +1,25 @@
 const execSync = require('child_process').execSync
 const pkg = require('./package.json')
+const fs = require('fs')
+const path = require('path')
+const JSON_FILE_NAME = '.env.json'
+const DEFAULT_TEST_FILE_NAME = 'sortCallback'
+const filePath = path.join(__dirname, JSON_FILE_NAME) // 文件路径
+
+// 检查文件是否已存在
+if (!fs.existsSync(filePath)) {
+	const content = {
+		TEST_FILE_NAME: DEFAULT_TEST_FILE_NAME,
+	}
+
+	const jsonContent = JSON.stringify(content, null, 4)
+
+	try {
+		fs.writeFileSync(filePath, jsonContent, 'utf8')
+	} catch (err) {
+		console.error('写入文件时发生错误：', err)
+	}
+}
 
 if (!pkg.envDependencies) {
 	process.exit(0)
@@ -7,12 +27,10 @@ if (!pkg.envDependencies) {
 
 let env = Object.assign({}, process.env)
 
-if (typeof pkg.envDependencies.localJSON === 'string') {
-	try {
-		Object.assign(env, require(pkg.envDependencies.localJSON))
-	} catch (err) {
-		console.log(`Could not read or parse pkg.envDependencies.localJSON. Processing with env only.`)
-	}
+try {
+	Object.assign(env, require(`./${JSON_FILE_NAME}`))
+} catch (err) {
+	console.log(`Could not read or parse 'JSON_FILE_NAME'.`)
 }
 
 if (typeof pkg.envDependencies.params === 'undefined') {
