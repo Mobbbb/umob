@@ -36,11 +36,11 @@ describe('throttle: ', () => {
 
     it('Restting waiting time', async () => {
         let count = 0
-        const addClick = throttle(() => count++, 200)
+        const addClick = throttle(() => count++, 300)
 
         addClick()
         await testPromise(addClick, 100)
-        await testPromise(addClick, 150)
+        await testPromise(addClick, 220)
         await testPromise(addClick, 100)
 
         expect(count).toEqual(2)
