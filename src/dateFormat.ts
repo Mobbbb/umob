@@ -1,21 +1,19 @@
+import toDate from './toDate'
+import isVaildDate from './isVaildDate'
+
 /**
  * @description 时间格式化
- * @param {Date | String} argDate 日期
+ * @param {*} argDate 日期
  * @param {String} argFmt 日期格式
  * @returns {String} date
  */
-function dateFormat(argDate: Date | string | number, argFmt: string = 'yyyy-MM-dd'): string {
-    let date = argDate
+function dateFormat(argDate: any, argFmt: string = 'yyyy-MM-dd'): string {
+    const date = toDate(argDate)
     let fmt = argFmt
-    if (!(date instanceof Date)) {
-        date = new Date(date)
-    }
 
-    if (Number.isNaN(date.getDate())) {
-        return '1970-01-01'
-    }
+    if (!isVaildDate(date)) return ''
 
-    const a = ['日', '一', '二', '三', '四', '五', '六']
+    const week = ['日', '一', '二', '三', '四', '五', '六']
 
     interface oDate {
         'M+': number,
@@ -40,7 +38,7 @@ function dateFormat(argDate: Date | string | number, argFmt: string = 'yyyy-MM-d
         'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
         S: date.getMilliseconds(), // 毫秒
         w: date.getDay(), // 周
-        W: a[date.getDay()], // 大写周
+        W: week[date.getDay()], // 大写周
         T: 'T',
     }
     if (/(y+)/.test(fmt)) {

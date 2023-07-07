@@ -1,7 +1,7 @@
 /**
  * @description 获取cookie
- * @param {string} name cookie键名
- * @returns {string}
+ * @param {String} name cookie键名
+ * @returns {String}
  */
 function getCookie(name: string): string {
     const cookieArr = document.cookie.split(';')
