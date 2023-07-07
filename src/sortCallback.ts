@@ -27,11 +27,11 @@ function trans(a: any, b: any) {
  * @param {String} params.type desc | asc
  * @returns {Function}
  */
-function sortCallback<T, K extends keyof T>(params?: {
+function sortCallback<T, K extends keyof T>(params: {
     type?: 'desc' | 'asc',
     key?: K,
-}): (a: T, b: T) => number {
-    const { type = sortType.desc, key } = params || {}
+} = {}): (a: T, b: T) => number {
+    const { type = sortType.desc, key } = params
 
     const isDesc = type === sortType.desc
 

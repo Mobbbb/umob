@@ -1,55 +1,55 @@
+import dateFormat from './dateFormat'
+import isVaildDate from './isVaildDate'
+import toDate from './toDate'
+import toMonth from './toMonth'
+
 /**
  * @description 获取两个日期中间的日期
- * @param {String} startDate yyyy-MM-dd/yyyy-MM/yyyy 开始日期
- * @param {String} endDate yyyy-MM-dd/yyyy-MM/yyyy 结束日期
- * @param {Boolean} includeHeadAndTail 是否包含起止日期
+ * @param {*} startDate 开始日期
+ * @param {*} endDate 结束日期
+ * @param {Object} opt 配置选项
+ * @param {Boolean} opt.includeHead 是否包含起始日期
+ * @param {Boolean} opt.includeTail 是否包含结尾日期
+ * @param {String} opt.format 日期格式化
  * @returns {Array}
  */
-function dateGap(startDate: string, endDate: string, includeHeadAndTail: boolean = true): string[] {
-    let sTime = startDate
-    if (Number.isNaN((new Date(sTime)).getDate()) || Number.isNaN((new Date(endDate)).getDate())) {
-        return ['1970-01-01']
-    }
-
-    const { length } = sTime
+function dateGap(startDate: any, endDate: any, opt: {
+    includeHead?: boolean,
+    includeTail?: boolean,
+    format?: string,
+} = {}): string[] {
     const diffdate = []
-    while (sTime < endDate) {
-        diffdate.push(sTime)
+    const sTime = toDate(startDate)
+    const eTime = toDate(endDate)
+    const { includeHead = true, includeTail = true, format = 'yyyy-MM-dd' } = opt
 
-        if (length === 7) {
-            let nextMonth: number | string = parseInt(sTime.slice(5, 7), 10) + 1
-            let nextYear = parseInt(sTime.slice(0, 4), 10)
+    if (isVaildDate(sTime) && isVaildDate(eTime)) {
+        while (sTime < eTime) {
+            diffdate.push(dateFormat(sTime, format))
+            sTime.setTime(sTime.getTime() + 24 * 3600 * 1000)
+        }
+
+        if (includeTail) diffdate.push(dateFormat(eTime, format))
+    } else if (toMonth(startDate) && toMonth(endDate)) {
+        let sMonth = toMonth(startDate)
+        const eMonth = toMonth(endDate)
+        while (sMonth < eMonth) {
+            diffdate.push(sMonth)
+            let nextMonth: number | string = parseInt(sMonth.slice(5, 7), 10) + 1
+            let nextYear = parseInt(sMonth.slice(0, 4), 10)
             nextYear = nextMonth > 12 ? nextYear + 1 : nextYear
             nextMonth = nextMonth > 12 ? nextMonth - 12 : nextMonth
 
             nextMonth = nextMonth < 10 ? `0${nextMonth}` : nextMonth
-            sTime = `${nextYear}-${nextMonth}`
-        } else if (length === 10) {
-            // 获取开始日期时间戳
-            const timeTs = new Date(sTime).getTime()
-
-            // 增加一天时间戳后的日期
-            const nextDate = timeTs + (24 * 60 * 60 * 1000)
-
-            const nextYear = `${new Date(nextDate).getFullYear()}-`
-            const nextMonth = (new Date(nextDate).getMonth() + 1 < 10)
-                ? `0${(new Date(nextDate).getMonth() + 1)}-`
-                : `${(new Date(nextDate).getMonth() + 1)}-`
-            const nextDay = (new Date(nextDate).getDate() < 10)
-                ? `0${new Date(nextDate).getDate()}`
-                : new Date(nextDate).getDate()
-
-            sTime = nextYear + nextMonth + nextDay
-        } else {
-            sTime = (Number(sTime) + 1).toString()
+            sMonth = `${nextYear}-${nextMonth}`
         }
+
+        if (includeTail) diffdate.push(eMonth)
+    } else {
+        return []
     }
 
-    if (includeHeadAndTail) {
-        diffdate.push(endDate)
-    } else {
-        diffdate.shift()
-    }
+    if (!includeHead) diffdate.shift()
 
     return diffdate
 }
