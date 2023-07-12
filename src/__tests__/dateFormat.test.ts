@@ -2,7 +2,7 @@ import { dateFormat } from '../index'
 
 describe('dateFormat: ', () => {
     it('Testing Error input', () => {
-        expect(dateFormat('20211230')).toEqual('1970-01-01')
+        expect(dateFormat('202112301')).toEqual('')
     })
 
     it('Testing Date input', () => {
@@ -13,8 +13,20 @@ describe('dateFormat: ', () => {
         expect(dateFormat(1640822400000)).toEqual('2021-12-30')
     })
 
-    it('Testing string input', () => {
+    it('Testing string input 1', () => {
         expect(dateFormat('2021-12-30')).toEqual('2021-12-30')
+    })
+
+    it('Testing string input 2', () => {
+        expect(dateFormat('20211230')).toEqual('2021-12-30')
+    })
+
+    it('Testing string input 3', () => {
+        expect(dateFormat('2021/12/30')).toEqual('2021-12-30')
+    })
+
+    it('Testing string input 4', () => {
+        expect(dateFormat('2021/12/30 05:32:33')).toEqual('2021-12-30')
     })
 
     it('Testing format', () => {
