@@ -64,6 +64,8 @@ module.exports = {
         // 箭头函数参数括号
         'arrow-parens': ['error', 'as-needed'],
         'func-names': ['error', 'never'],
+        // 换行符在操作符之后
+        'operator-linebreak': ['error', 'after'],
         // this别名
         '@typescript-eslint/no-this-alias': ['error', {
             allowedNames: ['context', 'self'],
