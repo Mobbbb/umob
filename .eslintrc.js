@@ -49,12 +49,8 @@ module.exports = {
         'no-plusplus': 'off',
         // 箭头函数省略return
         'arrow-body-style': 'off',
-        // 禁止使用 ts-ignore
-        '@typescript-eslint/ban-ts-comment': 'off',
+        'no-else-return': 'off',
         'import/prefer-default-export': 'off',
-        // 关闭类型推断
-        '@typescript-eslint/no-inferrable-types': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
         'space-before-function-paren': ['error', {
             'anonymous': 'never',
             'named': 'never',
@@ -66,6 +62,11 @@ module.exports = {
         'func-names': ['error', 'never'],
         // 换行符在操作符之后
         'operator-linebreak': ['error', 'after'],
+        // 禁止使用 ts-ignore
+        '@typescript-eslint/ban-ts-comment': 'off',
+        // 关闭类型推断
+        '@typescript-eslint/no-inferrable-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
         // this别名
         '@typescript-eslint/no-this-alias': ['error', {
             allowedNames: ['context', 'self'],
