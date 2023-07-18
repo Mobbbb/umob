@@ -26,7 +26,7 @@ import { debounce } from 'umob'
 
 On-demand Import:
 ``` javascript
-import debounce from 'umob/debounce'
+import debounce from 'umob/lib/debounce'
 ```
 
 CommonJS:
