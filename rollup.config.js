@@ -4,9 +4,9 @@ const commonjs = require('@rollup/plugin-commonjs') // 将commonJS的语法转�
 const terser = require('@rollup/plugin-terser') // 代码压缩
 const del = require('rollup-plugin-delete')
 
+/** Deprecated Start **/
 const fs = require('fs')
 const path = require('path')
-
 const rootPath = path.resolve(__dirname, './src')
 const files = fs.readdirSync(rootPath).filter(file => file !== 'index.ts')
 const moduleFile = []
@@ -31,6 +31,7 @@ for (const file of files) {
         })
     }
 }
+/** Deprecated End **/
 
 module.exports = [
     {
@@ -64,5 +65,4 @@ module.exports = [
             typescript({ module: 'ESNext' }),
         ],
     },
-    ...moduleFile,
 ]

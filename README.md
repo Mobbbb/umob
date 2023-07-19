@@ -24,11 +24,6 @@ Then, assuming you're using a module-compatible system (like webpack, Rollup etc
 import { debounce } from 'umob'
 ```
 
-On-demand Import:
-``` javascript
-import debounce from 'umob/lib/debounce'
-```
-
 CommonJS:
 ``` javascript
 const { debounce } = require('umob')
