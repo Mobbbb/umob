@@ -1,12 +1,12 @@
 {
 	"name": "umob",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "Umob modular utilities",
-	"main": "lib/index.cjs.js",
+	"browser": "lib/index.esm.js",
 	"module": "lib/index.esm.js",
 	"jsnext:main": "lib/index.esm.js",
-	"browser": "lib/index.umd.js",
-	"types": "lib/index.d.ts",
+	"main": "lib/index.cjs.js",
+	"types": "lib/types/index.d.ts",
 	"files": [
 		"lib"
 	],
