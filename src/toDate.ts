@@ -17,15 +17,17 @@ function toDate(params: any): Date {
     if (!match) return INVALID_DATE
 
     const year = parseInt(match[1], 10)
-    const month = parseInt(match[3], 10)
+    const month = parseInt(match[3], 10) - 1
     const day = parseInt(match[4], 10)
-    const time = match[5] ? match[5] : ' 00:00:00'
+    const hours = parseInt(match[6], 10) || 0
+    const minutes = parseInt(match[7], 10) || 0
+    const seconds = parseInt(match[8], 10) || 0
 
-    const date = new Date(`${year}-${month}-${day}${time}`)
+    const date = new Date(year, month, day, hours, minutes, seconds)
 
     if (
         date.getFullYear() !== year ||
-        date.getMonth() !== month - 1 ||
+        date.getMonth() !== month ||
         date.getDate() !== day
     ) { // 输入的年月日时分秒不合法
         return INVALID_DATE
