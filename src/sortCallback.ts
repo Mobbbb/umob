@@ -5,9 +5,18 @@ const enum sortType {
     asc = 'asc',
 }
 
+const dateRegex = /^(\d{4})(\D)?(\d{2})\2(\d{2})(\s(\d{2}):(\d{2}):(\d{2}))?$/
+
 function trans(a: any, b: any) {
     let compareA: number = 0
     let compareB: number = 0
+    if (dateRegex.test(a) && dateRegex.test(b)) {
+        return {
+            compareA: a,
+            compareB: b,
+        }
+    }
+
     if (typeof a === 'string') compareA = Number(a)
     if (typeof b === 'string') compareB = Number(b)
 
@@ -51,7 +60,10 @@ function sortCallback<T, K extends keyof T>(params: {
         if (Number.isNaN(compareA)) return 1
         if (Number.isNaN(compareB)) return -1
 
-        return isDesc ? compareB - compareA : compareA - compareB
+        const descExp = compareB > compareA ? 1 : -1
+        const ascExp = compareA > compareB ? 1 : -1
+
+        return isDesc ? descExp : ascExp
     }
 
     return compareFn
