@@ -1,3 +1,6 @@
+import dateFormat from './dateFormat'
+import toDate from './toDate'
+import isVaildDate from './isVaildDate'
 /**
  * @description 将参数转化为yyyy-MM格式
  * @param {*} params 入参
@@ -11,7 +14,16 @@ function toMonth(params: any): string {
     const monthRegex = /^(\d{4})\D?(\d{2})$/
     const match = paramsDate.match(monthRegex)
 
-    if (!match) return ''
+    if (!match) {
+        let dateParse = params
+        if (typeof dateParse === 'number') dateParse = dateParse.toString()
+
+        const toDateRes = toDate(dateParse)
+        if (isVaildDate(toDateRes)) {
+            return dateFormat(toDateRes).slice(0, 7)
+        }
+        return ''
+    }
 
     const year = match[1]
     const month = match[2]
