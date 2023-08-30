@@ -1,6 +1,6 @@
 {
 	"name": "umob",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "Umob modular utilities",
 	"browser": "lib/index.esm.js",
 	"module": "lib/index.esm.js",
