@@ -51,7 +51,7 @@ A global, Umob, will be created, containing all exports of the module version.
 | ```debounce(fn, wait, [immediate=true])```： </br> 创建一个 debounced（防抖动）函数，该函数会从上一次被调用后，延迟 ```wait``` 毫秒后调用 ```fn``` 方法 | ```fn``` *(Function)*：要防抖动的函数 </br> ```wait``` *(number)*：需要延迟的毫秒数 </br> ```[immediate=true]``` *(boolean)*：首次调用是否立即执行一次 ```fn``` | *(Function)*：返回新的 debounced（防抖动）函数 |
 | ```throttle(fn, wait, [immediate=true])```： </br> 创建一个节流函数，在 ```wait``` 秒内最多执行 ```fn``` 一次的函数 | ```fn``` *(Function)*：要节流的函数 </br> ```wait``` *(number)*：需要节流的毫秒数 </br> ```[immediate=true]``` *(boolean)*：首次调用是否立即执行一次 ```fn``` | *(Function)*：返回新的 throttle 函数 |
 | ```getUrlParams([variable=])```： </br> 获取url的参数 | ```[variable=]``` *(String)*：要获取的参数名称；也可为空，为空将获取url中的所有参数并返回对象 | *(Object \| String)*：返回指定的url参数值或url所有的参数对象 |
-| ```sortCallback([opt=])```： </br> 返回一个方法，该方法为sort函数的入参 | ```[opt=]``` *(Object)*：选项对象 </br> ```[opt.type='desc']``` *(string)*：```desc``` 升序，```ace``` 降序 </br> ```[opt.key]``` *(string \| number \| Symbol)*：当排序数组为 ```Array<Object>``` 时必填，取值为排序字段的键名 | *(Function)*：返回sort排序方法 |
+| ```sortCallback([opt=])```： </br> 返回一个方法，该方法为sort函数的入参 | ```[opt=]``` *(Object)*：选项对象 </br> ```[opt.type='desc']``` *(string)*：```desc``` 升序，```asc``` 降序 </br> ```[opt.key]``` *(string \| number \| Symbol)*：当排序数组为 ```Array<Object>``` 时必填，取值为排序字段的键名 | *(Function)*：返回sort排序方法 |
 | ```deepClone(obj)```： </br> 深度克隆 | ```obj``` *(\*)*：克隆对象 | *(\*)*：返回结果与obj相同，不包括原型链上的属性 |
 | ```getCookie(name)```： </br> 获取cookie | ```name``` *(string)*：cookie键名 | *(string)*：cookie值 |
 | ```delCookie(name, [domain=location.hostname])```： </br> 删除cookie | ```name``` *(string)*：cookie键名 </br> ```[domain=location.hostname]``` *(string)*：cookie所在的域 | - |
