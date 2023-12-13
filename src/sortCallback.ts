@@ -60,8 +60,8 @@ function sortCallback<T, K extends keyof T>(params: {
         if (Number.isNaN(compareA)) return 1
         if (Number.isNaN(compareB)) return -1
 
-        const descExp = compareB > compareA ? 1 : -1
-        const ascExp = compareA > compareB ? 1 : -1
+        const descExp = compareB >= compareA ? 1 : -1
+        const ascExp = compareA >= compareB ? 1 : -1
 
         return isDesc ? descExp : ascExp
     }

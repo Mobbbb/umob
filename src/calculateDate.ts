@@ -8,7 +8,7 @@ import dateFormat from './dateFormat'
  * @param {Number | String | Date} inputDate 日期，20201011、'2020-10-11'、'2020/10/11'、new Date('2020-10-11')
  * @param {Number} num 天数(月数)
  * @param {String} fmt 返回的日期格式
- * @return {Date} num天(月)之后的日期
+ * @return {string} num天(月)之后的日期
  */
 function calculateDate(
     inputDate: number | string | Date,
