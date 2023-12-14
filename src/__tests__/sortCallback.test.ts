@@ -15,12 +15,12 @@ describe('sortCallback: ', () => {
 
     it('Sort an mixed array in desc', async () => {
         const res = [1, 'aaa', '8', undefined, '3', '7', null].sort(sortCallback())
-        expect(res.slice(0, 4)).toEqual(['8', '7', '3', 1])
+        expect(res).toEqual(['8', '7', '3', 1, 'aaa', null, undefined])
     })
 
     it('Sort an mixed array in asc', async () => {
         const res = [1, null, '8', undefined, '3', '7', null].sort(sortCallback({ type: 'asc' }))
-        expect(res.slice(0, 4)).toEqual([1, '3', '7', '8'])
+        expect(res).toEqual([1, '3', '7', '8', null, null, undefined])
     })
 
     it('Sort an object[] in asc', async () => {
@@ -78,13 +78,19 @@ describe('sortCallback: ', () => {
             { num: '3', id: 'e' },
             { num: '7', id: 'f' },
             { num: null, id: 'g' },
+            { id: 'h' },
         ]
         const res = arr.sort(sortCallback({ key: 'num' }))
-        expect(res.slice(0, 4)).toEqual([
+        expect(res).toEqual([
             { num: '8', id: 'c' },
             { num: '7', id: 'f' },
             { num: '3', id: 'e' },
             { num: 1, id: 'a' },
+            { num: null, id: 'h' },
+            { num: 'aaa', id: 'b' },
+            { num: undefined, id: 'd' },
+            { num: null, id: 'g' },
+            { id: 'h' },
         ])
     })
 })

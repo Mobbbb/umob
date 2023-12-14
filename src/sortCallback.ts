@@ -44,24 +44,39 @@ function sortCallback<T, K extends keyof T>(params: {
 
     const isDesc = type === sortType.desc
 
-    function compareFn(a: T, b: T): number {
-        if (a === null || typeof a === 'undefined') return 1
-        if (b === null || typeof b === 'undefined') return -1
+    let errorNum = Infinity
+    if (isDesc) errorNum = -Infinity
 
+    function compareFn(a: T, b: T): number {
         let { compareA, compareB } = trans(a, b)
 
+        if (a === null || typeof a === 'undefined') compareA = errorNum
+        if (b === null || typeof b === 'undefined') compareB = errorNum
+
         if (key && isObject(a) && isObject(b)) {
-            if (a[key] === null) return 1
-            if (b[key] === null) return -1
             compareA = trans(a[key], b[key]).compareA
             compareB = trans(a[key], b[key]).compareB
+
+            if (a[key] === null || typeof a[key] === 'undefined') compareA = errorNum
+            if (b[key] === null || typeof b[key] === 'undefined') compareB = errorNum
         }
 
-        if (Number.isNaN(compareA)) return 1
-        if (Number.isNaN(compareB)) return -1
+        if (Number.isNaN(compareA)) compareA = errorNum
+        if (Number.isNaN(compareB)) compareB = errorNum
 
-        const descExp = compareB >= compareA ? 1 : -1
-        const ascExp = compareA >= compareB ? 1 : -1
+        let descExp = 0
+        let ascExp = 0
+        if (compareB > compareA) {
+            descExp = 1
+        } else if (compareB < compareA) {
+            descExp = -1
+        }
+
+        if (compareA > compareB) {
+            ascExp = 1
+        } else if (compareA < compareB) {
+            ascExp = -1
+        }
 
         return isDesc ? descExp : ascExp
     }
