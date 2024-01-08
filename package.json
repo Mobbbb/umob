@@ -15,7 +15,7 @@
 		"build": "rollup -c",
 		"test": "jest",
 		"test:single": "node env-dependencies.js",
-		"installGitHook": "husky install"
+		"prepare": "husky install"
 	},
 	"envDependencies": {
 		"params": ["jest ./src/__tests__/${TEST_FILE_NAME}.test.ts --coverage --collectCoverageFrom=./src/${TEST_FILE_NAME}.ts"]
