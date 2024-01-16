@@ -48,6 +48,14 @@ describe('toDate: ', () => {
         expect(toDate(new Date('2027-11-12 00:00:00'))).toEqual(new Date('2027-11-12 00:00:00'))
     })
 
+    it('Date type 8', () => {
+        expect(toDate('2023/07')).toEqual(new Date('2023-07-01 00:00:00'))
+    })
+
+    it('Date type 9', () => {
+        expect(toDate('202307')).toEqual(new Date('2023-07-01 00:00:00'))
+    })
+
     it('Error date', () => {
         const status = isVaildDate(toDate(true)) ||
             isVaildDate(toDate(undefined)) ||
@@ -56,7 +64,6 @@ describe('toDate: ', () => {
             isVaildDate(toDate([])) ||
             isVaildDate(toDate('2023/07.10')) ||
             isVaildDate(toDate('2023/07/66')) ||
-            isVaildDate(toDate('2023/07')) ||
             isVaildDate(toDate('2023-07-08 55:22:11')) ||
             isVaildDate(toDate('-20220125')) ||
             isVaildDate(toDate('202201251'))

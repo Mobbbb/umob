@@ -11,17 +11,32 @@ function toDate(params: any): Date {
     if (typeof params === 'string') paramsDate = params
 
     const dateRegex = /^(\d{4})(\D)?(\d{2})\2(\d{2})(\s(\d{2}):(\d{2}):(\d{2}))?$/
-    const match = paramsDate.match(dateRegex)
+    const match = paramsDate.match(dateRegex) || []
+
+    const monthRegex = /^(\d{4})\D?(\d{2})$/
+    const monthMatch = paramsDate.match(monthRegex)
 
     const INVALID_DATE = new Date('')
-    if (!match) return INVALID_DATE
 
-    const year = parseInt(match[1], 10)
-    const month = parseInt(match[3], 10) - 1
-    const day = parseInt(match[4], 10)
-    const hours = parseInt(match[6], 10) || 0
-    const minutes = parseInt(match[7], 10) || 0
-    const seconds = parseInt(match[8], 10) || 0
+    let year = 0
+    let month = 0
+    let day = 1
+    let hours = 0
+    let minutes = 0
+    let seconds = 0
+    if (match.length) {
+        year = parseInt(match[1], 10)
+        month = parseInt(match[3], 10) - 1
+        day = parseInt(match[4], 10)
+        hours = parseInt(match[6], 10) || 0
+        minutes = parseInt(match[7], 10) || 0
+        seconds = parseInt(match[8], 10) || 0
+    } else if (monthMatch) {
+        year = parseInt(monthMatch[1], 10)
+        month = parseInt(monthMatch[2], 10) - 1
+    } else {
+        return INVALID_DATE
+    }
 
     const date = new Date(year, month, day, hours, minutes, seconds)
 
