@@ -16,8 +16,9 @@ function calculateDate(
     fmt?: string,
 ): string {
     const date = toDate(inputDate)
+    const str = inputDate.toString()
 
-    if (isVaildDate(date)) {
+    if (isVaildDate(date) && str.length > 7) {
         date.setTime(date.getTime() + num * 24 * 3600 * 1000)
         return dateFormat(date, fmt)
     }

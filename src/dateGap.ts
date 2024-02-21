@@ -21,9 +21,11 @@ function dateGap(startDate: any, endDate: any, opt: {
     const diffdate = []
     const sTime = toDate(startDate)
     const eTime = toDate(endDate)
+    const startDateLength = startDate.toString().length
+    const endDateLength = startDate.toString().length
     const { includeHead = true, includeTail = true, format = 'yyyy-MM-dd' } = opt
 
-    if (isVaildDate(sTime) && isVaildDate(eTime)) {
+    if (isVaildDate(sTime) && isVaildDate(eTime) && startDateLength > 7 && endDateLength > 7) {
         while (sTime < eTime) {
             diffdate.push(dateFormat(sTime, format))
             sTime.setTime(sTime.getTime() + 24 * 3600 * 1000)

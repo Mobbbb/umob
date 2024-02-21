@@ -25,8 +25,12 @@ describe('calculateDate: ', () => {
         expect(calculateDate('2023-12-31', 1)).toEqual('2024-01-01')
     })
 
-    it('Time Date', () => {
+    it('Time Date1', () => {
         expect(calculateDate('2023/07/07 12:55:12', 32)).toEqual('2023-08-08')
+    })
+
+    it('Testing Date2', () => {
+        expect(calculateDate(new Date('2023-07-07'), 5)).toEqual('2023-07-12')
     })
 
     it('Testing format', () => {
