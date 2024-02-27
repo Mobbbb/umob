@@ -68,6 +68,21 @@ describe('sortCallback: ', () => {
         ])
     })
 
+    it('Sort an object[date MM-dd] in asc', async () => {
+        const arr = [
+            { date: '06-05 09:15:55', id: 'a' },
+            { date: '06-04', id: 'b' },
+            { date: '05-05 10:15:55', id: 'c' },
+            { date: '04-30 23:59:59', id: 'd' },
+        ]
+        expect(arr.sort(sortCallback({ type: 'asc', key: 'date' }))).toEqual([
+            { date: '04-30 23:59:59', id: 'd' },
+            { date: '05-05 10:15:55', id: 'c' },
+            { date: '06-04', id: 'b' },
+            { date: '06-05 09:15:55', id: 'a' },
+        ])
+    })
+
     it('Sort an mixed object array in desc', async () => {
         const arr = [
             { num: null, id: 'h' },
