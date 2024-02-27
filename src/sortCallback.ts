@@ -5,7 +5,7 @@ const enum sortType {
     asc = 'asc',
 }
 
-const dateRegex = /^(\d{4})(\D)?(\d{2})\2(\d{2})(\s(\d{2}):(\d{2}):(\d{2}))?$/
+const dateRegex = /^(\d{4})?(\D)?(\d{2})(\D)?(\d{2})(\s(\d{2}):(\d{2}):(\d{2}))?$/
 
 function trans(a: any, b: any) {
     let compareA: number = 0
