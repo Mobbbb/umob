@@ -56,8 +56,8 @@ A global, Umob, will be created, containing all exports of the module version.
 | ```setCookie(name, value, daysToExpire = 30, [path='/'], [domain=location.hostname])```： </br> 设置cookie | ```name``` *(string)*：cookie键名 </br> ```value``` *(string)*：cookie值 </br> ```[daysToExpire=30]``` *(number)*：cookie过期天数 </br> ```[path='/']``` *(string)*：cookie路径 ```[domain=location.hostname]``` *(string)*：cookie所在的域 | - |
 | ```bigNumTransform(num, [opt=])```： </br> 将大数字转化为万/亿的形式 | ```num``` *(number \| string)*：待转化的数 </br> ```[opt=]``` *(Object)*：选项对象 </br> ```[opt.float=2]``` *(number)*：精度 </br> ```[opt.merge=true]``` *(boolean)*：返回结果是否与单位合并，若为 ```false``` 将返回数组 </br> ```[opt.unit=['万', '亿']]``` *(Array\<string\>)*：单位配置 | *(Array\<string\> \| string)*：返回转化后的字符串或字符串数组，若无法转化，将返回 ```'NaN'``` 或 ```['NaN', '']``` |
 | ```extractStr(str, startSymbol, endSymbol, [opt=])```： </br> 提取字符串两个特征字符之间的内容 | ```str``` *(string)*：待提取的字符串 </br>  ```startSymbol``` *(string)*：起始特征字符，若特征字符串为以下字符 ```[]\^$.\|?*+(){}``` 之一，在传入时需添加 ```\\``` 双反斜杠进行转义。传入空字符串，匹配结果将从第一个字符匹配至 ```endSymbol``` </br>  ```endSymbol``` *(string)*：终止特征字符。传入空字符串，结果将从 ```startSymbol``` 匹配至字符串末尾 </br> ```[opt=]``` *(Object)*：选项对象 </br> ```[opt.greedyMode=false]``` *(boolean)*：是否开启贪婪模式，若为 ```true``` 返回结果中将包含最大匹配长度的字符串 </br> ```[opt.global=false]``` *(boolean)*：是否开启全局匹配，若为 ```true``` 将返回所有两个特征字符串之间的内容数组 | *(Array\<string\> \| string)*：两个特征字符之间的内容或内容数组，```opt.global=true``` 返回结果为数组，```opt.global=false``` 返回结果为字符串 |
-| ```isObject(variable)```： </br> 判断是否为对象 | ```variable``` *(string)*：待判断的参数 | *(boolean)*：true \| false |
-| ```isVaildDate(variable)```： </br> 判断是否为有效的日期 | ```variable``` *(string)*：待判断的参数 | *(boolean)*：true \| false |
+| ```isObject(variable)```： </br> 判断是否为对象 | ```variable``` *(any)*：待判断的参数 | *(boolean)*：true \| false |
+| ```isVaildDate(variable)```： </br> 判断是否为有效的日期对象 | ```variable``` *(any)*：待判断的参数 | *(boolean)*：true \| false |
 
 ## documentation (EN)
 | Method & Description     | Parameters     | Returns     |
